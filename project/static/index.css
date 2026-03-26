@@ -160,11 +160,20 @@ body, html, * {
     /*border: 2px red solid;*/
 }
 
+.line-container {
+    position: absolute;
+    /*border: 2px solid red;*/
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .line {
     position: absolute;
-    width: 7%;
-    aspect-ratio: 1 / 10; /* matches your viewBox 100/1000 ratio */
+    /*border: 2px solid red;*/
     transform: rotate(-45deg);
     color: var(--border);
     clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+    filter: drop-shadow(0 4px 8px var(--shadow));
 }

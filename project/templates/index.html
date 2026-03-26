@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DapperPixelguy</title>
     <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,46 +11,85 @@
 <body>
 <div id="landing">
         <div id="lines">
-    <svg viewBox="0 0 100 1000" class="line" style="left: 14%;
-    top: -5%;">
-    <path
-        d="
-        M50 0
-        Q70 50 50 100
-        Q30 150 50 200
-        Q70 250 50 300
-        Q30 350 50 400
-        Q70 450 50 500
-        Q30 550 50 600
-        Q70 650 50 700
-        Q30 750 50 800
-        Q70 850 50 900
-        Q30 950 50 1000
-        "
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"></path>
-</svg>
-        <svg viewBox="0 0 100 1000" class="line" style="left: 73%;
-    top: -30%;">
-    <path
-        d="
-        M50 0
-        Q70 50 50 100
-        Q30 150 50 200
-        Q70 250 50 300
-        Q30 350 50 400
-        Q70 450 50 500
-        Q30 550 50 600
-        Q70 650 50 700
-        Q30 750 50 800
-        Q70 850 50 900
-        Q30 950 50 1000
-        "
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"></path>
-</svg></div>
+            <div class="line-container"
+                 style="width: 40vw;
+                 height: 80vh;
+                 left: 0;
+                 bottom: 0;
+            ">
+                <svg viewBox="0 0 100 1000" class="line">
+                <path d="
+                    M50 0
+                    Q70 50 50 100
+                    Q30 150 50 200
+                    Q70 250 50 300
+                    Q30 350 50 400
+                    Q70 450 50 500
+                    Q30 550 50 600
+                    Q70 650 50 700
+                    Q30 750 50 800
+                    Q70 850 50 900
+                    Q30 950 50 1000
+                    "
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2">
+                </path>
+                </svg>
+            </div>
+            <div class="line-container"
+                 style="width: 40vw;
+                 height: 100%;
+                 left: 50%;
+                 transform: translateX(-50%);
+            ">
+                <svg viewBox="0 0 100 1000" class="line">
+                <path d="
+                    M50 0
+                    Q70 50 50 100
+                    Q30 150 50 200
+                    Q70 250 50 300
+                    Q30 350 50 400
+                    Q70 450 50 500
+                    Q30 550 50 600
+                    Q70 650 50 700
+                    Q30 750 50 800
+                    Q70 850 50 900
+                    Q30 950 50 1000
+                    "
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2">
+                </path>
+                </svg>
+            </div>
+            <div class="line-container"
+                 style="width: 40vw;
+                 height: 80vh;
+                 right: 0;
+                 top: 0;
+            ">
+                <svg viewBox="0 0 100 1000" class="line">
+                <path d="
+                    M50 0
+                    Q70 50 50 100
+                    Q30 150 50 200
+                    Q70 250 50 300
+                    Q30 350 50 400
+                    Q70 450 50 500
+                    Q30 550 50 600
+                    Q70 650 50 700
+                    Q30 750 50 800
+                    Q70 850 50 900
+                    Q30 950 50 1000
+                    "
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2">
+                </path>
+                </svg>
+            </div>
+        </div>
     <div id="information">
         <h2>Gabriel Taylor</h2>
         <h1>DapperPixelguy</h1>
@@ -110,11 +149,21 @@ async function animateLine(line) {
     }
 }
 
+function setDiag(line) {
+    const parent = line.parentElement
+    const w = parent.offsetWidth
+    const h = parent.offsetHeight
+    const B = Math.atan2(w, h) * (180 / Math.PI)
+    line.style.height = `${Math.sqrt(w ** 2 + h ** 2)+50}px`
+    line.style.transform = `rotate(-${B}deg)`
+
+}
 
 lines.forEach(line =>  {
     animateLine(line)
+    setDiag(line)
 })
-
+window.addEventListener('resize', () => lines.forEach(setDiag))
 
 // Load saved theme
 if (localStorage.getItem('theme') === 'dark') {
