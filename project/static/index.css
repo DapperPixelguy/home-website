@@ -96,6 +96,7 @@ body, html, * {
     margin-bottom: 5rem;
     flex-direction: column;
     align-items: center;
+    z-index: 400;
 }
 
 #icons {
