@@ -125,7 +125,25 @@ body {
 
 }
 
-/*  */
+#revamp-reminder {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    cursor: pointer;
+    height: 3rem;
+    max-width: 25rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--border);
+    box-shadow: 0 0 10px var(--shadow);
+    overflow: hidden;
+    z-index: 4;
+    font-family: 'Poppins', sans-serif;
+
+    p {
+        line-break: loose;
+    }
+}
 
 #theme-toggle {
     position: fixed;
