@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, jsonify
 
 main = Blueprint('main', __name__)
 
@@ -8,4 +8,4 @@ def index():
 
 @main.route('/ping')
 def keepalive():
-    return 'OK', 200
+    return jsonify(Status='OK'), 200
