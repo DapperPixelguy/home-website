@@ -130,18 +130,20 @@ body {
     top: 2rem;
     left: 2rem;
     cursor: pointer;
-    height: 3rem;
-    max-width: 25rem;
+    height: auto;
+    width: 5rem;
     padding: 10px;
     border-radius: 5px;
-    border: 2px solid var(--border);
-    box-shadow: 0 0 10px var(--shadow);
+    color: var(--text-muted);
+    filter: drop-shadow(0 4px 2px var(--shadow));
     overflow: hidden;
     z-index: 4;
     font-family: 'Poppins', sans-serif;
+    /*background: var(--bg);*/
 
     p {
         line-break: loose;
+        color: var(--text-main);
     }
 }
 
