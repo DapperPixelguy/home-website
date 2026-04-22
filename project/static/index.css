@@ -37,7 +37,7 @@ body {
     position: fixed;
     width: 100%;
     height: 100vh;
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -98,6 +98,11 @@ body {
 
 #information {
     display: flex;
+    position: absolute;
+    justify-items: flex-start;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
     margin-bottom: 5rem;
     flex-direction: column;
     align-items: center;
@@ -121,8 +126,11 @@ body {
         }
     }
     gap: 1rem;
+}
 
-
+#time {
+    margin-top: 2rem;
+    font-family: "Poppins", sans-serif;
 }
 
 #revamp-reminder {
