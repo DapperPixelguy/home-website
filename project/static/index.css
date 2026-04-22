@@ -13,6 +13,7 @@ body, html, * {
     --border: #999999;
 
     --shadow: rgba(0, 0, 0, 0.25);
+
 }
 
 .dark {
@@ -31,8 +32,17 @@ body {
     background: var(--bg);
 }
 
+* {
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
 
 #landing {
+
+    &.hidden {
+        pointer-events: none;
+    }
+
     background: var(--bg);
     position: fixed;
     width: 100%;
@@ -43,7 +53,6 @@ body {
     align-items: center;
     --line-size: 10rem;
     --line-width: 3px;
-    transition: background 0.3s ease, color 0.3s ease;
     overflow: hidden;
     z-index: 3;
 
@@ -128,30 +137,63 @@ body {
     gap: 1rem;
 }
 
+
 #time {
-    margin-top: 2rem;
+    letter-spacing: 1px;
+    color: var(--text-main);
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    font-variant-numeric: tabular-nums;
+    background: none;
+    /*margin-top: 2rem;*/
+    filter: drop-shadow(0 4px 4px var(--shadow));
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 2rem;
+    transform: translateX(-50%);
+}
+
+#revamp-container {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 4;
+
+
+}
+
+#revamp-text {
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.2s ease;
     font-family: "Poppins", sans-serif;
+    color: var(--text-muted);
+    font-size: 1rem;
+    filter: drop-shadow(0 4px 2px var(--shadow));
+    margin-top: 1rem;
 }
 
 #revamp-reminder {
-    position: fixed;
-    top: 2rem;
-    left: 2rem;
     cursor: pointer;
     height: auto;
-    width: 5rem;
-    padding: 10px;
-    border-radius: 5px;
+    width: 3rem;
     color: var(--text-muted);
     filter: drop-shadow(0 4px 2px var(--shadow));
-    overflow: hidden;
-    z-index: 4;
     font-family: 'Poppins', sans-serif;
-    /*background: var(--bg);*/
+    transition: transform 0.2s ease;
 
     p {
         line-break: loose;
         color: var(--text-main);
+    }
+
+    &:hover {
+        color: var(--text-main);
+        +#revamp-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
 
