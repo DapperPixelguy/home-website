@@ -13,4 +13,8 @@ def create_app():
 
     from .main import main
     app.register_blueprint(main)
+
+    from .legacy import legacy
+    app.register_blueprint(legacy, url_prefix='/legacy')
+
     return app

@@ -13,6 +13,7 @@ body, html, * {
     --border: #999999;
 
     --shadow: rgba(0, 0, 0, 0.25);
+
 }
 
 .dark {
@@ -31,19 +32,27 @@ body {
     background: var(--bg);
 }
 
+* {
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
 
 #landing {
+
+    &.hidden {
+        pointer-events: none;
+    }
+
     background: var(--bg);
     position: fixed;
     width: 100%;
     height: 100vh;
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     justify-content: center;
     align-items: center;
     --line-size: 10rem;
     --line-width: 3px;
-    transition: background 0.3s ease, color 0.3s ease;
     overflow: hidden;
     z-index: 3;
 
@@ -98,6 +107,11 @@ body {
 
 #information {
     display: flex;
+    position: absolute;
+    justify-items: flex-start;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
     margin-bottom: 5rem;
     flex-direction: column;
     align-items: center;
@@ -121,11 +135,67 @@ body {
         }
     }
     gap: 1rem;
+}
+
+
+#time {
+    letter-spacing: 1px;
+    color: var(--text-main);
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    font-variant-numeric: tabular-nums;
+    background: none;
+    /*margin-top: 2rem;*/
+    filter: drop-shadow(0 4px 4px var(--shadow));
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 2rem;
+    transform: translateX(-50%);
+}
+
+#revamp-container {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    z-index: 4;
 
 
 }
 
-/*  */
+#revamp-text {
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.2s ease;
+    font-family: "Poppins", sans-serif;
+    color: var(--text-muted);
+    font-size: 1rem;
+    filter: drop-shadow(0 4px 2px var(--shadow));
+    margin-top: 1rem;
+}
+
+#revamp-reminder {
+    cursor: pointer;
+    height: auto;
+    width: 3rem;
+    color: var(--text-muted);
+    filter: drop-shadow(0 4px 2px var(--shadow));
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.2s ease;
+
+    p {
+        line-break: loose;
+        color: var(--text-main);
+    }
+
+    &:hover {
+        color: var(--text-main);
+        +#revamp-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
 
 #theme-toggle {
     position: fixed;

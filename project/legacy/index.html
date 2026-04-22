@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DapperPixelguy</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Anonymous+Pro">
+        <link rel="icon" type="image/png" href="assets/troll.png">
+        <meta name="description" content="DapperPixelguy – personal site featuring some information about myself, links and some projects completed as part of my software development course.">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "DapperPixelguy",
+                "alternateName": "dapperpixelguy",
+                "url": "https://DapperPixelguy.wtf/"
+            }
+        </script>
+    </head>
+
+    <body onload="startTime()">
+          <header id="gradient-top"></header>
+          <button id='reveal-button' onclick='revealPage()'>Enter</button>
+
+          <!-- <button id="projectbutton" onclick="location.href='projects/'"><span>Projects</span></button> -->
+
+          <div id="InfoText">
+            <button id='InfoButton' onclick='showInfo()'>
+                <img id ='InfoImg' onmouseover="tro()" onmouseleave="untro()" src='assets/info.png' style='height: 2em; opacity: .75'>
+            </button>
+            <div id="InfoBox">
+              <p style="position: relative; left: 5px; bottom:31%; font-size: 80%;">
+                Created as an introduction to HTML and CSS. Potentially receiving some more changes.
+              </p>
+            </div>
+          </div>
+
+          <div id ="SpecText">
+            <button id='SpecButton' onclick='showSpec()'>
+              <img src='assets/monitor.png' style='height: 1.7em; opacity: .7'>
+            </button>
+            <div id ="SpecBox">
+              <p style = "position: relative; top: -10px; font-size: 180%; font-weight: bold; text-align: center ">
+              [Specs]
+              </p>
+             <div id = "core-internals">
+
+             <p style = 'font-size: 150%; text-align: center'>
+             [Core Internals]
+             </p>
+             <p style = 'text-align: center'>
+             ----------------------------
+             </p>
+             <a style = 'top: -10px' href='https://jsfiddle.net/' target ='_blank'>
+              Ryzen 7 5700X3D
+              </a>
+
+              <a href='https://jsfiddle.net/' target ='_blank'>
+              RTX 3060 12GB VRAM
+              </a>
+               <a href='https://www.amazon.co.uk/gp/product/B0DMTPFW3J' target ='_blank'>
+              Corsair RM650e
+              </a>
+              <a href='https://jsfiddle.net/' target ='_blank'>
+              MSI B500M PRO-VDH WiFi
+              </a>
+
+              </div>
+              <div id = "storage">
+              <p style = 'font-size: 150%; text-align: center'>
+             [Storage]
+             </p>
+             <p style = 'text-align: center'>
+             ----------------------------
+             </p>
+             <a href='https://jsfiddle.net/' target ='_blank'>
+              32GB DDR4 RAM
+              </a>
+             <a href='https://jsfiddle.net/' target ='_blank'>
+              1TB NVME 2.0 Storage
+
+              </a>
+              <a href='https://jsfiddle.net/' target ='_blank'>
+              1TB HDD
+
+              </a>
+              </div>
+
+              <div id = "peripherals">
+              <p style = 'font-size: 150%; text-align: center'>
+             [Peripherals]
+             </p>
+             <p style = 'text-align: center'>
+             ----------------------------
+             </p>
+             <a href='https://jsfiddle.net/' target ='_blank'>
+              AOC Q27G2S 1440p 165hz 27"
+              </a>
+              <a href='https://jsfiddle.net/' target ='_blank' rel='noopener'>
+              AOC 24G2U 1080p 144hz 24"
+              </a>
+              <a href='https://wooting.io/wooting-two-he' target ='_blank'>
+              Wooting Two HE
+              </a>
+              <a href='https://jsfiddle.net/' target ='_blank'>
+              Logitech G502 Lightspeed
+              </a>
+              <a href='https://jsfiddle.net/' target ='_blank'>
+              Razer Blackshark V3 Pro
+              </a>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div id="IntroText">
+            <h1 id="Username">DapperPixelguy</h1>
+            <div id='social-Links'>
+
+              <div style='display: flex; flex-flow: column nowrap; row-gap: 30px; position: static; align-items: center'>
+                <a style='position: static; font-size: 1.5em; text-decoration: none' href='https://discord.com/users/639945209446400020' target='_blank'>[Discord]</a>
+                <a style='position: static; font-size: 1.5em; text-decoration: none' href='https://discord.com/users/639945209446400020' target='_blank'>[\\\\\\\]</a>
+
+              </div>
+              <div style='display: flex; flex-flow: column nowrap; row-gap: 30px; position: absolute; left: 50%; transform: translate(-50%); align-items: center'>
+                <a style='position: static; font-size: 1.5em; text-decoration: none' href='http://steamcommunity.com/id/dapperpixelguy' target='_blank'>[Steam]</a>
+                <a style='position: static; font-size: 1.5em; text-decoration: none' href='http://steamcommunity.com/id/dapperpixelguy' target='_blank'>[|||||]</a>
+                <!--   <p style= 'position: relative; top: 1.5em; text-align: center; font-size: 1.5em'>[Steam]</p> -->
+              </div>
+              <div style='display: flex; flex-flow: column nowrap; row-gap: 30px; position: static; align-items: center'>
+                <a style='position: static; font-size: 1.5em; text-decoration: none' href='https://github.com/DapperPixelguy' target='_blank'>[Github]</a>
+                <a style='position: static; font-size: 1.5em; text-decoration: none' href='https://github.com/DapperPixelguy' target='_blank'>[//////]</a>
+                <!--  <p style= 'position: relative; top: 1.5em; text-align; center; font-size: 1.5em'>[PLACEHOLDER]</p> -->
+              </div>
+            </div>
+          </div>
+
+          <div id='footer'>
+            <p id='Credit'>[DapperPixelguy MMXXVI]</p>
+            <p id='Device'>[Unknown]</p>
+            <p id='Time'></p>
+          </div>
+    </body>
+    <script src="main.js"></script>
+</html>
+<!--Info icons created by Shashank Singh - -->

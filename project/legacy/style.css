@@ -1,0 +1,432 @@
+html {
+        min-height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        height: calc(100vh);
+        color: rgba(255, 255, 255, .75);
+        font-family: 'Anonymous Pro', monospace;
+        background: linear-gradient(-45deg, rgb(25, 25, 25), rgb(25, 25, 25), rgb(25, 25, 25), rgb(50, 50, 50), rgb(25, 25, 25), rgb(25, 25, 25), rgb(25, 25, 25));
+        /*background-size: 300%;
+      animation: gradient 20s linear infinite;*/
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 115% 50%;
+        }
+
+        100% {
+          background-position: -15% 50%;
+        }
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #IntroText {
+        position: absolute;
+        overflow-x: hidden;
+        min-height: 20em;
+        min-width: 0;
+        top: 50%;
+        left: 50%;
+        border: 1px solid rgb(54, 57, 62);
+        border-radius: 10px;
+        margin: auto;
+        width: 0;
+        /* 60em default */
+        height: 15em;
+        max-width: 101%;
+        background-image: linear-gradient(135deg, rgb(50, 50, 50), rgb(25, 25, 25));
+        transform: translate(-50%, -50%);
+        display: block;
+        transition: width 1.6s ease;
+        opacity: 0;
+      }
+
+      #IntroText.clicked {
+        width: 60em;
+      }
+
+      #reveal-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px;
+        height: 3em;
+        width: 9em;
+        font-size: 2em;
+        background: linear-gradient(135deg, rgb(50, 50, 50), rgb(25, 25, 25));
+        color: rgba(120, 120, 120, 0.5);
+        font-weight: bold;
+        text-shadow: 0 2px rgb(200, 200, 200);
+        z-index: 1;
+        display: none;
+        transition: opacity .05s linear;
+        border-left: #545454 2px solid;
+        border-top: #545454 2px solid;
+        border-bottom: #000000 2px solid;
+        border-right: #000000 2px solid;
+      }
+
+      #reveal-button:hover{
+          cursor: pointer;
+      }
+
+      #reveal-button:hover:active{
+          filter:invert(1);
+      }
+
+      @keyframes Cursor {
+            0% {border-right: 2px solid rgba(255,255,255, 0.75)}
+            49% {border-right: 2px solid rgba(255,255,255, 0.75)}
+            50% {border-right: 2px solid transparent}
+            100% {border-right: 2px solid transparent}
+      }
+
+      #Username {
+        position: relative;
+        text-align: center;
+        white-space: nowrap;
+        border-right: 2px solid transparent;
+        line-height: 1.1;
+        top: 1.1em;
+        margin: 0 auto;
+        width: fit-content;
+        opacity: 0;
+        /*left: 50%;*/
+        /*transform: translate(-50%);*/
+        font-size: 4em;
+        /*transition: opacity 1s 1.5s;*/
+      }
+
+      /* Applied once the 'Enter' button is clicked */
+      #Username.clicked {
+        opacity: 1;
+          animation: Cursor 1s infinite;
+      }
+
+      #Credit {
+        position: absolute;
+        right: 1em;
+        font-size: 80%
+      }
+
+      #Device {
+        position: absolute;
+        left: 1em;
+        font-size: 80%
+      }
+
+      #Time {
+        position: absolute;
+        left: 50%;
+        font-size: 80%;
+        transform: translate(-50%)
+      }
+
+      #social-Links {
+        width: 38.5em;
+        position: relative;
+        top: 7em;
+        height: 3em;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        opacity: 0;
+        transition: opacity 1s 1.7s;
+      }
+
+      #social-Links.clicked {
+        opacity: 1;
+      }
+
+      #social-Links a {
+        transition: background-color 0.45s, color .3s ease-in-out, box-shadow .3s ease-in-out;
+        box-shadow: inset 0 0 0 0 rgba(200, 200, 200, .75);
+        color: rgba(255, 255, 255, .75);
+      }
+
+      #social-Links a:hover {
+        /*background-color: rgba(255, 255, 255, .75);*/
+        box-shadow: inset 150px 0 0 0 rgba(255, 255, 255, .75);
+        color: rgb(25, 25, 25);
+      }
+
+      #IntroText.full-width {
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        min-width: 0;
+      }
+
+      #IntroText.full-width #Username {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%);
+      }
+
+      #IntroText.full-width #social-Links {
+        position: absolute;
+        top: calc(40% + 6em);
+        left: 50%;
+        transform: translate(-50%);
+        width: 31em;
+      }
+
+      #gradient-top.full-width {
+        height: 0;
+      }
+
+      #IntroText.mobile {
+        height: 100%;
+        width: 100%;
+        border: 0;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        min-width: 0;
+        font-size: 150%;
+        transition: width 0s;
+      }
+
+      #IntroText.mobile #Username {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%);
+      }
+
+      #IntroText.mobile #social-Links {
+        position: absolute;
+        top: calc(40% + 6em);
+        left: 50%;
+        transform: translate(-50%);
+        width: 31em;
+      }
+
+      #v1 {
+        border-left: 6px solid green;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        margin-left: -3px;
+        top: 0;
+      }
+
+      #footer {
+        position: absolute;
+        width: 100%;
+        height: 1.7em;
+        bottom: 0.3em;
+        /*background: rgba(35,35,35,.6);*/
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center
+      }
+
+      #footer.full-width {
+        background: transparent;
+        bottom: -.3em;
+      }
+
+      #InfoText {
+        position: relative;
+        float: right;
+        right: 1em;
+      }
+      #InfoText.mobile{
+        display: none
+      }
+
+      #InfoButton {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        top: 1em;
+        float: right;
+        background: linear-gradient(135deg, rgb(50, 50, 50), rgb(25, 25, 25));
+        color: rgba(255, 255, 255, .75);
+        height: 2.5em;
+        width: 2.5em;
+        border-left: #545454 2px solid;
+        border-top: #545454 2px solid;
+        border-bottom: #000000 2px solid;
+        border-right: #000000 2px solid;
+      }
+
+      #InfoButton.active {
+        filter: invert(1)
+      }
+
+      #InfoButton:hover {
+          cursor: pointer;
+      }
+
+      #InfoButton:active:hover {
+          filter: invert(1)
+      }
+
+      #InfoBox {
+        position: relative;
+        right: 1em;
+        top: 0.8em;
+        width: 0;
+        height: 2em;
+        background: white;
+        border: 2px solid rgb(54, 57, 62);
+        border-radius: 5px;
+        background: linear-gradient(135deg, rgb(50, 50, 50), rgb(25, 25, 25));
+        color: rgba(255, 255, 255, .75);
+        transition: width 1.5s, opacity 1s;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      #InfoBox.active {
+        width: 23em;
+        opacity: 1;
+        transition: width 1.5s, opacity 1s;
+      }
+
+      #SpecText {
+        position: relative;
+        float: left;
+        left: 1em;
+      }
+
+      #SpecText.mobile {
+        display: none
+      }
+
+      #SpecButton {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        top: 1em;
+        float: left;
+        background: linear-gradient(135deg, rgb(50, 50, 50), rgb(25, 25, 25));
+        color: rgba(255, 255, 255, .75);
+        height: 2.5em;
+        width: 2.5em;
+        border-left: #545454 2px solid;
+        border-top: #545454 2px solid;
+        border-bottom: #000000 2px solid;
+        border-right: #000000 2px solid;
+      }
+
+      #SpecButton:hover:active {
+          filter: invert(1);
+      }
+
+      #SpecButton:hover {
+          cursor: pointer;
+      }
+
+      #SpecButton.active {
+        filter: invert(1)
+      }
+
+      #SpecButton.disabled {
+        cursor: not-allowed
+      }
+
+      #SpecBox {
+        position: relative;
+        left: 1em;
+        top: 0.8em;
+        width: 0;
+        height: 1.8em;
+        background: white;
+        border: 2px solid rgb(54, 57, 62);
+        border-radius: 5px;
+        background: linear-gradient(135deg, rgb(50, 50, 50), rgb(25, 25, 25));
+        color: rgba(255, 255, 255, .75);
+        transition: width 1.5s 1.5s, opacity 1.5s 1s, height 1.5s;
+        opacity: 0;
+        overflow-x: hidden;
+      }
+
+      #SpecBox.active {
+        width: 20em;
+        opacity: 1;
+        height: 40em;
+        transition: width 1.5s, opacity 1s, height 1.5s 1.5s;
+      }
+
+      #SpecBox a {
+        position: relative;
+        font-size: 120%;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        color: rgba(255, 255, 255, .75);
+        font-family: Arial, sans-serif;
+        top: -10px;
+        padding: 5px;
+        opacity: 0;
+        transition: opacity 2s
+      }
+      #SpecBox.active a{
+        opacity: 1;
+        transition: opacity 2s 2s
+      }
+      #SpecBox p{
+        opacity: 0;
+        transition: opacity 2s
+      }
+      #SpecBox.active p{
+        opacity: 1;
+        transition: opacity 2s 1.5s
+      }
+       #SpecBox a:hover {
+        font-size: 130%;
+      }
+
+       #projectbutton {
+           position: absolute;
+           left: 50%;
+           top: 0.8em;
+           transform: translate(-50%);
+           height: 3em;
+           width: 15em;
+           background: linear-gradient(135deg, rgb(50, 50, 50), rgb(25, 25, 25));
+           color: rgba(255, 255, 255, .75);
+           border-left: #545454 2px solid;
+           border-top: #545454 2px solid;
+           border-bottom: #000000 2px solid;
+           border-right: #000000 2px solid;
+           border-radius: 10px;
+       }
+
+       #projectbutton:hover {
+           cursor: pointer;
+       }
+
+       #projectbutton:hover:active {
+           filter:invert(1);
+       }
+
+       #projectbutton span{
+           font-weight: bold;
+           text-shadow: 0 2px rgb(200, 200, 200);
+           font-size: 1.5rem;
+           color: rgba(120, 120, 120, 0.5);
+           line-height: 65%;
+       }

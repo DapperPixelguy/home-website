@@ -1,5 +1,10 @@
 const toggle = document.getElementById('theme-toggle');
+const revamp_reminder = document.getElementById('revamp-reminder')
 let rotation = 0
+
+revamp_reminder.addEventListener('click', () => {
+    window.location.href = '/legacy'
+})
 
 toggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
@@ -65,5 +70,25 @@ window.addEventListener('scroll', ()=> {
     const landing = document.getElementById('landing')
 
     landing.style.opacity = `${1 - (window.scrollY / landing.offsetHeight)}`
+    if (parseFloat(landing.style.opacity) <= 0.1) {
+        landing.classList.add('hidden')
+    }
+    else {
+        landing.classList.remove('hidden')
+    }
 
+})
+
+function setTime(){
+    const time = document.getElementById('time')
+    let d = new Date()
+    let [h, m, s] = [("0" + d.getHours()).slice(-2), ("0" + d.getMinutes()).slice(-2), ("0" + d.getSeconds()).slice(-2)]
+    time.textContent = `${h}:${m}:${s}`
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setTime()
+    setInterval(()=>{
+        setTime()
+    }, 1000)
 })
