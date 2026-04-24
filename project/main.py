@@ -31,6 +31,7 @@ def status():
     global last_seen
 
     if request.headers.get('X-Secret-Key') != SECRET_KEY:
+        print('Request denied')
         return jsonify(Status='Unauthorized'), 401
 
     data = request.get_json()
