@@ -92,3 +92,16 @@ document.addEventListener('DOMContentLoaded', () => {
         setTime()
     }, 1000)
 })
+
+const source = new EventSource('/status-stream')
+let statusDisplay = document.getElementById('status-display')
+let statusSub = document.getElementById('status-sub')
+let statusText = document.getElementById('status-text')
+
+source.onmessage = (event) => {
+    const data = JSON.parse(event.data)
+    statusDisplay.className = ''
+    statusDisplay.classList.add(data['status'])
+    statusText.textContent = `${data['status']}`
+    statusSub.textContent = `${data['message']}`
+}
