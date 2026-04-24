@@ -55,7 +55,8 @@ def ping_monitor():
                 last_seen = datetime.now()
         time.sleep(1)
 
-threading.Thread(target=ping_monitor, daemon=True).start()
+def start_monitor():
+    threading.Thread(target=ping_monitor, daemon=True).start()
 
 @main.route('/status-stream')
 def status_stream():
