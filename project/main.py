@@ -6,6 +6,7 @@ from flask import render_template, Blueprint, jsonify, request, Response
 from datetime import datetime
 from dotenv import load_dotenv
 import os
+from gevent import sleep
 
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -53,7 +54,7 @@ def ping_monitor():
         if timediff.total_seconds() >= status_timeout_seconds:  # Has it been more than 60 seconds without a ping?
             if not last_seen:  # Set a last seen time for the start of each inactivity
                 last_seen = datetime.now()
-        time.sleep(1)
+        sleep(1)
 
 def start_monitor():
     threading.Thread(target=ping_monitor, daemon=True).start()
@@ -86,6 +87,6 @@ def status_stream():
             else:
                 data = json.dumps({'status': 'online', 'message': f'"{message}"'})
                 yield f"data: {data}\n\n"
-            time.sleep(1)
+            sleep(1)
 
     return Response(generate(), mimetype='text/event-stream')
