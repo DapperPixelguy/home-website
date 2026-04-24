@@ -35,7 +35,7 @@
                     Q70 850 50 900
                     Q30 950 50 1000
                     "
-                    fill="none"
+                    fill="none".
                     stroke="currentColor"
                     stroke-width="2">
                 </path>
@@ -104,6 +104,17 @@
         </div>
     </div>
     <p id="time"></p>
+    <div id="status-container">
+        <p id="status-main">I am currently
+            <span id="status-display" class="offline">
+                <svg fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 3a5 5 0 100 10A5 5 0 008 3z" fill="currentColor"></path>
+                </svg>
+                <span id="status-text">Offline</span>
+            </span>
+        </p>
+        <p id="status-sub"></p>
+    </div>
 </div>
 <div id="theme-toggle">
         <div id="theme-icons">
