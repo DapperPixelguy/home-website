@@ -6,7 +6,7 @@ from flask import render_template, Blueprint, jsonify, request, Response
 from datetime import datetime
 from dotenv import load_dotenv
 import os
-from gevent import sleep
+from gevent import sleep, spawn
 
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -57,7 +57,7 @@ def ping_monitor():
         sleep(1)
 
 def start_monitor():
-    threading.Thread(target=ping_monitor, daemon=True).start()
+    spawn(ping_monitor)
 
 @main.route('/status-stream')
 def status_stream():
