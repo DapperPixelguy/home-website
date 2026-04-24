@@ -154,6 +154,52 @@ body {
     transform: translateX(-50%);
 }
 
+#status-container {
+    font-family: "Poppins", sans-serif;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*width: 11.8rem;*/
+}
+
+#status-main{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    color: var(--text-main);
+}
+
+
+#status-display {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-left: 5px;
+    /*filter: drop-shadow(0 4px 4px var(--shadow));*/
+    svg {
+        width: 1.2rem;
+    }
+    &.online {
+        color: #00aa00;
+    }
+    &.offline {
+        color: var(--text-muted);
+    }
+}
+
+
+
+#status-sub {
+    color: var(--text-muted);
+    font-style: italic;
+    filter: drop-shadow(0 4px 4px var(--shadow));
+}
+
 #revamp-container {
     position: absolute;
     top: 2rem;
