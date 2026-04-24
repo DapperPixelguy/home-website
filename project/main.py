@@ -1,4 +1,5 @@
 import json
+import threading
 import time
 
 from flask import render_template, Blueprint, jsonify, request, Response
@@ -27,17 +28,32 @@ last_seen = None
 def status():
     global last_ping
     global message
+    global last_seen
 
     if request.headers.get('X-Secret-Key') != SECRET_KEY:
         return jsonify(Status='Unauthorized'), 401
 
     data = request.get_json()
     last_ping = datetime.now()
+    last_seen = None
     try:
         message = data['message']
     except KeyError:
         pass
     return jsonify(Status='OK'), 200
+
+
+def ping_monitor():
+    global last_seen
+    status_timeout_seconds = 10
+    while True:
+        timediff = datetime.now() - last_ping
+        if timediff.total_seconds() >= status_timeout_seconds:  # Has it been more than 60 seconds without a ping?
+            if not last_seen:  # Set a last seen time for the start of each inactivity
+                last_seen = datetime.now()
+        time.sleep(1)
+
+threading.Thread(target=ping_monitor, daemon=True).start()
 
 @main.route('/status-stream')
 def status_stream():
@@ -46,13 +62,8 @@ def status_stream():
 
     def generate():
         global last_seen
-        status_timeout_seconds = 10
         while True:
-            timediff = datetime.now() - last_ping
-            if timediff.total_seconds() >= status_timeout_seconds: # Has it been more than 60 seconds without a ping?
-                if not last_seen: # Set a last seen time for the start of each inactivity
-                    last_seen = datetime.now()
-
+            if last_seen:
                 seendiff = datetime.now() - last_seen
 
                 if seendiff.total_seconds() <= 60:
@@ -72,7 +83,6 @@ def status_stream():
             else:
                 data = json.dumps({'status': 'online', 'message': f'"{message}"'})
                 yield f"data: {data}\n\n"
-                last_seen = None
             time.sleep(1)
 
     return Response(generate(), mimetype='text/event-stream')
