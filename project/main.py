@@ -1,4 +1,13 @@
-from flask import render_template, Blueprint, jsonify
+import json
+import time
+
+from flask import render_template, Blueprint, jsonify, request, Response
+from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 main = Blueprint('main', __name__)
 
@@ -9,3 +18,61 @@ def index():
 @main.route('/ping')
 def keepalive():
     return jsonify(Status='OK'), 200
+
+last_ping = datetime.now()
+message = "This is a default message"
+last_seen = None
+
+@main.route('/status', methods=['POST'])
+def status():
+    global last_ping
+    global message
+
+    if request.headers.get('X-Secret-Key') != SECRET_KEY:
+        return jsonify(Status='Unauthorized'), 401
+
+    data = request.get_json()
+    last_ping = datetime.now()
+    try:
+        message = data['message']
+    except KeyError:
+        pass
+    return jsonify(Status='OK'), 200
+
+@main.route('/status-stream')
+def status_stream():
+    global last_ping
+    global message
+
+    def generate():
+        global last_seen
+        status_timeout_seconds = 10
+        while True:
+            timediff = datetime.now() - last_ping
+            if timediff.total_seconds() >= status_timeout_seconds: # Has it been more than 60 seconds without a ping?
+                if not last_seen: # Set a last seen time for the start of each inactivity
+                    last_seen = datetime.now()
+
+                seendiff = datetime.now() - last_seen
+
+                if seendiff.total_seconds() <= 60:
+                    x = seendiff.total_seconds().__floor__()
+                    data = json.dumps({'status': 'offline', 'message': f'Last seen {x}s ago'})
+
+                elif seendiff.total_seconds() <= 3600:
+                    x = (seendiff.total_seconds() / 60).__floor__()
+                    data = json.dumps({'status': 'offline', 'message': f'Last seen {x}m ago'})
+
+                else:
+                    x = (seendiff.total_seconds() / 60 / 60).__floor__()
+                    data = json.dumps({'status': 'offline', 'message': f'Last seen {x}h ago'})
+
+                yield f"data: {data}\n\n"
+
+            else:
+                data = json.dumps({'status': 'online', 'message': f'"{message}"'})
+                yield f"data: {data}\n\n"
+                last_seen = None
+            time.sleep(1)
+
+    return Response(generate(), mimetype='text/event-stream')
