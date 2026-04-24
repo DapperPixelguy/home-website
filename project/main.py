@@ -49,6 +49,7 @@ def ping_monitor():
     status_timeout_seconds = 10
     while True:
         timediff = datetime.now() - last_ping
+        print(f'timediff: {timediff.total_seconds()}, last_seen: {last_seen}')
         if timediff.total_seconds() >= status_timeout_seconds:  # Has it been more than 60 seconds without a ping?
             if not last_seen:  # Set a last seen time for the start of each inactivity
                 last_seen = datetime.now()
