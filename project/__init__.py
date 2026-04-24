@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import threading
+from .main import start_monitor
 
 db = SQLAlchemy()
 
@@ -16,5 +18,7 @@ def create_app():
 
     from .legacy import legacy
     app.register_blueprint(legacy, url_prefix='/legacy')
+
+    start_monitor()
 
     return app
