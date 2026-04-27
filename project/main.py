@@ -23,13 +23,12 @@ def keepalive():
 
 last_ping = datetime.now()
 message = "This is a default message"
+activity = None
 last_seen = None
 
 @main.route('/status', methods=['POST'])
 def status():
-    global last_ping
-    global message
-    global last_seen
+    global last_ping, message, last_seen, activity
 
     if request.headers.get('X-Secret-Key') != SECRET_KEY:
         print('Request denied')
@@ -42,6 +41,9 @@ def status():
         message = data['message']
     except KeyError:
         pass
+
+    activity = data['activity']
+
     return jsonify(Status='OK'), 200
 
 
@@ -85,7 +87,7 @@ def status_stream():
                 yield f"data: {data}\n\n"
 
             else:
-                data = json.dumps({'status': 'online', 'message': f'"{message}"'})
+                data = json.dumps({'status': 'online', 'message': f'"{message}"', 'activity': activity})
                 yield f"data: {data}\n\n"
             sleep(1)
 
