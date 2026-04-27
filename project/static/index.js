@@ -100,8 +100,15 @@ let statusText = document.getElementById('status-text')
 
 source.onmessage = (event) => {
     const data = JSON.parse(event.data)
+
+    if (data['activity']){
+        statusSub.innerHTML = data['activity']
+    }
+    else {
+        statusSub.textContent = `${data['message']}`
+    }
+
     statusDisplay.className = ''
     statusDisplay.classList.add(data['status'])
     statusText.textContent = `${data['status']}`
-    statusSub.textContent = `${data['message']}`
 }
