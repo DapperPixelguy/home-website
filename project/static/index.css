@@ -200,6 +200,11 @@ body {
     filter: drop-shadow(0 4px 4px var(--shadow));
 }
 
+.activity {
+    font-style: italic;
+    font-weight: 600;
+}
+
 #revamp-container {
     position: absolute;
     top: 2rem;
