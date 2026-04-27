@@ -37,12 +37,13 @@ def status():
     data = request.get_json()
     last_ping = datetime.now()
     last_seen = None
-    try:
-        message = data['message']
-    except KeyError:
-        pass
+    new_message = data.get('message')
+    if new_message:
+        message = new_message
 
-    activity = data['activity']
+    new_activity = data.get('activity')
+    if new_activity != 'unchanged':
+        activity = new_activity
 
     return jsonify(Status='OK'), 200
 
