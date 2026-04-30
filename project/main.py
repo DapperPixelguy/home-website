@@ -50,7 +50,7 @@ def status():
 
 def ping_monitor():
     global last_seen
-    status_timeout_seconds = 10
+    status_timeout_seconds = 20
     while True:
         timediff = datetime.now() - last_ping
         print(f'timediff: {timediff.total_seconds()}, last_seen: {last_seen}')
