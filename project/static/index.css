@@ -321,33 +321,53 @@ body {
     background: #00000000;
 }
 
+.fade-in {
+    opacity: 0;
+    /*transform: translateY(30px);*/
+    transition: all 1s;
+    transform: scale(1.2);
+
+    &.visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 #about-me {
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: space-around;
-    color: var(--bg);
 
     & h2 {
+        color: var(--text-main);
         padding: 50px;
         box-sizing: content-box;
         font-family: "Poppins", sans-serif;
-        font-size: 5rem;
+        font-size: 6rem;
         position: relative;
         isolation: isolate;
+        filter: drop-shadow(0 4px 4px var(--shadow));
     }
-    & h2::before {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(15deg);
-        content: '';
-        clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-        background: lightskyblue;
-        width: 40rem;
-        height: 15rem;
-        display: inline-block;
-        z-index: -1;
+    & p{
+        width: 30%;
+        font-size: 1.3rem;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        filter: drop-shadow(0 4px 4px var(--shadow));
     }
+    /*& h2::before {*/
+    /*    position: absolute;*/
+    /*    top: 50%;*/
+    /*    left: 50%;*/
+    /*    transform: translate(-50%, -50%) rotate(15deg);*/
+    /*    content: '';*/
+    /*    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);*/
+    /*    background: lightskyblue;*/
+    /*    width: 40rem;*/
+    /*    height: 15rem;*/
+    /*    display: inline-block;*/
+    /*    z-index: -1;*/
+    /*}*/
 }
 
