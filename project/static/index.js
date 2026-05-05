@@ -112,3 +112,31 @@ source.onmessage = (event) => {
     statusDisplay.classList.add(data['status'])
     statusText.textContent = `${data['status']}`
 }
+
+async function Typewrite(elem) {
+    let count = 0
+    let text = elem.textContent
+    elem.textContent = ' '
+
+    for (; count <= text.length; count++) {
+        await new Promise(resolve => setTimeout(resolve, 50))
+        elem.textContent = text.slice(0, count)
+    }
+    // await new Promise(resolve => setTimeout(resolve, 1500))
+}
+
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
+
+            if (entry.target.classList.contains('typewriter')) {
+                Typewrite(entry.target)
+            }
+        }
+    })
+}, { rootMargin: '0px 0px -10% 0px'})
+
+document.querySelectorAll('.fade-in').forEach(elem => observer.observe(elem))
