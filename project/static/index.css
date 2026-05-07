@@ -333,6 +333,35 @@ body {
     }
 }
 
+
+@keyframes Cursor {
+  0% {opacity: 1}
+  49% {opacity: 1}
+  50% {opacity: 0}
+  100% {opacity: 0}
+}
+
+.typewriter {
+        & .typewriter-content{
+
+            &.typing {
+
+                &::after {
+                    content: '';
+                    display: inline-block;
+                    vertical-align: center;
+                    width: 2px;
+                    height: 1.2em;
+                    background: var(--text-muted);
+                    margin-left: 3px;
+                    opacity: 0;
+                    animation: Cursor 1s infinite;
+                }
+            }
+        }
+
+    }
+
 #about-me {
     display: flex;
     align-items: center;
@@ -349,12 +378,17 @@ body {
         isolation: isolate;
         filter: drop-shadow(0 4px 4px var(--shadow));
     }
-    & p{
+    & .typewriter{
         width: 30%;
-        font-size: 1.3rem;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 300;
-        filter: drop-shadow(0 4px 4px var(--shadow));
+
+        & .typewriter-content{
+                        font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            filter: drop-shadow(0 4px 4px var(--shadow));
+            color: var(--text-main);
+        }
+
     }
     /*& h2::before {*/
     /*    position: absolute;*/
