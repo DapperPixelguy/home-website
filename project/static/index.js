@@ -117,12 +117,14 @@ async function Typewrite(elem) {
     let count = 0
     let text = elem.textContent
     elem.textContent = ' '
+    elem.classList.add('typing')
 
     for (; count <= text.length; count++) {
         await new Promise(resolve => setTimeout(resolve, 50))
         elem.textContent = text.slice(0, count)
     }
-    // await new Promise(resolve => setTimeout(resolve, 1500))
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    elem.classList.remove('typing')
 }
 
 
@@ -133,7 +135,8 @@ const observer = new IntersectionObserver((entries) => {
             observer.unobserve(entry.target)
 
             if (entry.target.classList.contains('typewriter')) {
-                Typewrite(entry.target)
+                const contentElem = entry.target.querySelector('.typewriter-content')
+                Typewrite(contentElem)
             }
         }
     })
