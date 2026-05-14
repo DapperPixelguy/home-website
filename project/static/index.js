@@ -120,7 +120,7 @@ async function Typewrite(elem) {
     elem.classList.add('typing')
 
     for (; count <= text.length; count++) {
-        await new Promise(resolve => setTimeout(resolve, 50))
+        await new Promise(resolve => setTimeout(resolve, 30))
         elem.textContent = text.slice(0, count)
     }
     await new Promise(resolve => setTimeout(resolve, 1500))
