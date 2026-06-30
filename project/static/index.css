@@ -321,33 +321,96 @@ body {
     background: #00000000;
 }
 
+.fade-in {
+    opacity: 0;
+    /*transform: translateY(30px);*/
+    transition: all 1s;
+    transform: scale(1.2);
+
+    &.visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+
+@keyframes Cursor {
+  0% {opacity: 1}
+  49% {opacity: 1}
+  50% {opacity: 0}
+  100% {opacity: 0}
+}
+
+.typewriter {
+        & .typewriter-content{
+
+            &.typing {
+
+                &::after {
+                    content: '';
+                    display: inline-block;
+                    vertical-align: center;
+                    width: 2px;
+                    height: 1.2em;
+                    background: var(--text-muted);
+                    margin-left: 3px;
+                    opacity: 0;
+                    animation: Cursor 1s infinite;
+                }
+            }
+        }
+
+    }
+
 #about-me {
     display: flex;
     align-items: center;
-    width: 100%;
     justify-content: space-around;
-    color: var(--bg);
+    /* Maybe add a background here? Set a fixed height based on text content */
 
     & h2 {
+        color: var(--text-main);
         padding: 50px;
         box-sizing: content-box;
         font-family: "Poppins", sans-serif;
-        font-size: 5rem;
+        font-size: 6rem;
         position: relative;
         isolation: isolate;
+        filter: drop-shadow(0 4px 4px var(--shadow));
     }
-    & h2::before {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(15deg);
-        content: '';
-        clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-        background: lightskyblue;
-        width: 40rem;
-        height: 15rem;
-        display: inline-block;
-        z-index: -1;
+    & .typewriter{
+        width: 30%;
+
+        & .typewriter-content{
+                        font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            filter: drop-shadow(0 4px 4px var(--shadow));
+            color: var(--text-main);
+        }
+
+    }
+}
+
+/* Think drawing languages from a file so i can programatically add/remove them is a good idea*/
+/* Also want each one to fade in sequentially */
+
+#languages {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20rem;
+
+    & h2 {
+        color: var(--text-main);
+        padding: 50px;
+        box-sizing: content-box;
+        font-family: "Poppins", sans-serif;
+        font-size: 4rem;
+        position: relative;
+        isolation: isolate;
+        filter: drop-shadow(0 4px 4px var(--shadow));
     }
 }
 

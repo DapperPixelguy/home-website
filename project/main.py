@@ -1,12 +1,11 @@
 import json
-import threading
-import time
 
 from flask import render_template, Blueprint, jsonify, request, Response
 from datetime import datetime
 from dotenv import load_dotenv
 import os
 from gevent import sleep, spawn
+from .extensions import redis_client
 
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -21,57 +20,67 @@ def index():
 def keepalive():
     return jsonify(Status='OK'), 200
 
-last_ping = datetime.now()
-message = "This is a default message"
-activity = None
-last_seen = None
+
+def set_val(key, val):
+    redis_client.set(key, val)
+
+def get_val(key):
+    val = redis_client.get(key)
+    if not val:
+        return None
+    else:
+        return val.decode('utf-8')
+
+def del_val(key):
+    redis_client.delete(key)
+
 
 @main.route('/status', methods=['POST'])
 def status():
-    global last_ping, message, last_seen, activity
-
     if request.headers.get('X-Secret-Key') != SECRET_KEY:
         print('Request denied')
         return jsonify(Status='Unauthorized'), 401
 
     data = request.get_json()
-    last_ping = datetime.now()
-    last_seen = None
+
+    set_val('last_ping', datetime.now().isoformat())
+    redis_client.delete('last_seen')
     new_message = data.get('message')
     if new_message:
-        message = new_message
+        set_val('message', new_message)
 
     new_activity = data.get('activity')
     if new_activity != 'unchanged':
-        activity = new_activity
+        if new_activity:
+            set_val('activity', new_activity)
+        else:
+            del_val('activity')
 
     return jsonify(Status='OK'), 200
 
 
+# Monitor incoming pings to determine whether to display a last seen status
 def ping_monitor():
-    global last_seen
     status_timeout_seconds = 20
     while True:
-        timediff = datetime.now() - last_ping
-        print(f'timediff: {timediff.total_seconds()}, last_seen: {last_seen}')
+        timediff = datetime.now() - datetime.fromisoformat(get_val('last_ping'))
+        print(f'timediff: {timediff.total_seconds()}, last_seen: {get_val("last_seen")}')
         if timediff.total_seconds() >= status_timeout_seconds:  # Has it been more than 60 seconds without a ping?
-            if not last_seen:  # Set a last seen time for the start of each inactivity
-                last_seen = datetime.now()
+            if not get_val('last_seen'):  # Set a last seen time for the start of each inactivity
+                set_val('last_seen', datetime.now().isoformat())
         sleep(1)
 
 def start_monitor():
     spawn(ping_monitor)
 
+
 @main.route('/status-stream')
 def status_stream():
-    global last_ping
-    global message
-
     def generate():
-        global last_seen
         while True:
+            last_seen = get_val('last_seen')
             if last_seen:
-                seendiff = datetime.now() - last_seen
+                seendiff = datetime.now() - datetime.fromisoformat(last_seen)
 
                 if seendiff.total_seconds() <= 60:
                     x = seendiff.total_seconds().__floor__()
@@ -88,7 +97,10 @@ def status_stream():
                 yield f"data: {data}\n\n"
 
             else:
-                data = json.dumps({'status': 'online', 'message': f'"{message}"', 'activity': activity})
+                data = json.dumps({'status': 'online',
+                                   'message': f'"{get_val("message")}"',
+                                   'activity': get_val('activity')
+                                   })
                 yield f"data: {data}\n\n"
             sleep(1)
 

@@ -112,3 +112,34 @@ source.onmessage = (event) => {
     statusDisplay.classList.add(data['status'])
     statusText.textContent = `${data['status']}`
 }
+
+async function Typewrite(elem) {
+    let count = 0
+    let text = elem.textContent
+    elem.textContent = ' '
+    elem.classList.add('typing')
+
+    for (; count <= text.length; count++) {
+        await new Promise(resolve => setTimeout(resolve, 30))
+        elem.textContent = text.slice(0, count)
+    }
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    elem.classList.remove('typing')
+}
+
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
+
+            if (entry.target.classList.contains('typewriter')) {
+                const contentElem = entry.target.querySelector('.typewriter-content')
+                Typewrite(contentElem)
+            }
+        }
+    })
+}, { rootMargin: '0px 0px -10% 0px'})
+
+document.querySelectorAll('.fade-in').forEach(elem => observer.observe(elem))
