@@ -1,0 +1,4 @@
+languages:
+  - name: Python
+    level: high
+    image: logos/py-logo.png
