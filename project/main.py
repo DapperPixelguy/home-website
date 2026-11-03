@@ -51,6 +51,8 @@ def status():
 
     new_activity = data.get('activity')
     if new_activity != 'unchanged':
+        if new_activity == 'Bongo Cat':
+            new_activity = None
         if new_activity:
             set_val('activity', new_activity)
         else:
