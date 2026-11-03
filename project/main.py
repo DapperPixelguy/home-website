@@ -50,6 +50,7 @@ def status():
         set_val('message', new_message)
 
     new_activity = data.get('activity')
+    print(new_activity)
     if new_activity != 'unchanged':
         if new_activity == 'Bongo Cat':
             new_activity = None
